@@ -1,19 +1,25 @@
+import model.User;
+import model.Vehicle;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 public class Setup {
 	private static SessionFactory sessionFactory;
 
-	private static void configure(){
-		if (sessionFactory != null) return;
+	public static SessionFactory getSessionFuctory(){
+		if (sessionFactory != null) return sessionFactory;
 
-		Configuration cgf = new Configuration();
-		cgf.configure();
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+				.configure() // configures settings from hibernate.cfg.xml
+				.build();
 
-		ServiceRegistry sr = new StandardServiceRegistryBuilder().applySettings(cgf.getProperties()).build();
+		sessionFactory = new MetadataSources( registry )
+					.addAnnotatedClass(Vehicle.class)
+					.addAnnotatedClass(User.class)
+					.buildMetadata().buildSessionFactory();
 
-		sessionFactory = cgf.buildSessionFactory(sr);
+		return sessionFactory;
 	}
 }
