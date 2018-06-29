@@ -18,4 +18,4 @@ the entity has an associated identifier and is associated with a persistence con
 * Many-To-One allows map the FK column in the child entity. It can be used with @JoinColumn and @ManyToOne annotation with parent reference in child
 * One-To-One unidirectional can be used with @OneToOne and @PrimaryKeyJoinColumn with parent reference from the child side.
 
-##Lazy loading
+## Lazy loading
