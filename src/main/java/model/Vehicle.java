@@ -1,5 +1,6 @@
 package model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,10 +20,6 @@ public class Vehicle {
 
 	private String name;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
-
 	public Vehicle() {
 	}
 
@@ -36,10 +33,6 @@ public class Vehicle {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	@Override

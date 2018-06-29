@@ -13,20 +13,25 @@ public class App {
 	private final static SimpleDao simpleDao = new SimpleDaoImpl(Setup.getSessionFuctory());
 
 	public static void main(String[] args) {
-
-		Stock stock = new Stock(333, "Coca-Cola");
-
-		StockDetails stockDetails = new StockDetails(stock, "Coca-Cola Inc.", "An American corporation");
+//		User user = new User();
+//		user.setName("George");
+//
+//		user.getVehicles().add(new Vehicle("car"));
+//		user.getVehicles().add(new Vehicle("bike"));
+//		user.getVehicles().add(new Vehicle("track"));
+//		user.getVehicles().add(new Vehicle("vessel"));
+//		user.getVehicles().add(new Vehicle("airplane"));
 
 		SessionFactory sessionFactory = Setup.getSessionFuctory();
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 
-		session.save(stock);
-		session.save(stockDetails);
+		User user =  session.get(User.class, 16L);
 
 		tx.commit();
-
+		session.close();
+		System.out.println(user.getVehicles());
 		System.exit(0);
 	}
 }
+
